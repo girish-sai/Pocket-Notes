@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Send, Plus } from 'lucide-react';
+
+import addBtn from './images/add.png'
 import image from './images/1.png'
+import sendBtn from './images/send.png'
+
 const NotesApp = () => {
   // All our data storage
   const [groups, setGroups] = useState([]);
@@ -196,9 +199,9 @@ const NotesApp = () => {
         <div className="p-4">
           <button
             onClick={() => setShowCreateGroup(true)}
-            className="w-14 h-14 bg-blue-600 hover:bg-blue-700 rounded-full flex items-center justify-center text-white transition-colors ml-auto"
+            className="hover:bg-blue-700 rounded-full flex items-center justify-center text-white transition-colors ml-auto"
           >
-            <Plus size={24} />
+           <img src={addBtn} className='w-14 h-14' alt="" />
           </button>
         </div>
       </div>
@@ -214,9 +217,7 @@ const NotesApp = () => {
                 onClick={goBackToGroups}
                 className="md:hidden mr-4 text-white hover:bg-blue-700 p-2 rounded-lg transition-colors"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
+               <img src={sendBtn} alt="" />
               </button>
               
               <div
@@ -264,7 +265,7 @@ const NotesApp = () => {
                       : 'bg-gray-200 text-gray-400'
                   }`}
                 >
-                  <Send size={20} />
+                 <img src={sendBtn} className='w-6 h-6 ' alt="" />
                 </button>
               </div>
             </div>
