@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import './app.css'; // Import the CSS file
 
 import addBtn from './images/add.png'
 import image from './images/1.png'
@@ -166,40 +167,40 @@ const NotesApp = () => {
   }
   
   return (
-    <div className="flex h-screen bg-white">
+    <div className="app-container">
       {/* Left Sidebar - Hidden on mobile when content is shown */}
-      <div className={`w-80 bg-white border-r border-gray-200 flex flex-col md:flex ${showContent ? 'hidden md:flex' : 'flex'}`}>
+      <div className={`sidebar ${showContent ? 'sidebar-hidden-mobile' : 'sidebar-visible'}`}>
         {/* Header */}
-        <div className="p-6">
-          <h1 className="text-2xl font-semibold text-black">Pocket Notes</h1>
+        <div className="header">
+          <h1 className="header-title">Pocket Notes</h1>
         </div>
         
         {/* Groups List */}
-        <div className="flex-1 px-4 pb-4">
+        <div className="groups-container">
           {groups.map((group) => (
             <div
               key={group.id}
-              className={`flex items-center p-3 mb-2 rounded-lg cursor-pointer transition-colors ${
-                selectedGroup && selectedGroup.id === group.id ? 'bg-gray-100' : 'hover:bg-gray-50'
+              className={`group-item ${
+                selectedGroup && selectedGroup.id === group.id ? 'group-item-selected' : ''
               }`}
               onClick={() => selectGroup(group)}
             >
               <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold mr-4"
+                className="group-avatar"
                 style={{ backgroundColor: group.color }}
               >
                 {group.initials}
               </div>
-              <span className="text-gray-800 font-medium">{group.name}</span>
+              <span className="group-name">{group.name}</span>
             </div>
           ))}
         </div>
         
         {/* Add Group Button */}
-        <div className="p-4">
+        <div className="add-button-container">
           <button
             onClick={() => setShowCreateGroup(true)}
-            className="hover:bg-blue-700 rounded-full flex items-center justify-center text-white transition-colors ml-auto"
+            className="add-button"
           >
            <img src={addBtn} className='w-14 h-14' alt="" />
           </button>
@@ -207,36 +208,36 @@ const NotesApp = () => {
       </div>
       
       {/* Right Main Content - Full screen on mobile when content is shown */}
-      <div className={`flex-1 flex flex-col ${showContent ? 'flex md:flex' : 'hidden md:flex'}`}>
+      <div className={`main-content ${showContent ? 'main-content-visible' : 'main-content-hidden-mobile'}`}>
         {selectedGroup ? (
           <>
             {/* Header with group info and back button for mobile */}
-            <div className="bg-blue-600 px-6 py-4 flex items-center">
+            <div className="group-header">
               {/* Back button - visible only on mobile */}
               <button
                 onClick={goBackToGroups}
-                className="md:hidden mr-4 text-white hover:bg-blue-700 p-2 rounded-lg transition-colors"
+                className="back-button"
               >
                <img src={sendBtn} alt="" />
               </button>
               
               <div
-                className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold mr-4"
+                className="group-header-avatar"
                 style={{ backgroundColor: selectedGroup.color }}
               >
                 {selectedGroup.initials}
               </div>
-              <h2 className="text-xl font-semibold text-white">{selectedGroup.name}</h2>
+              <h2 className="group-header-title">{selectedGroup.name}</h2>
             </div>
             
             {/* Notes Display Area */}
-            <div className="flex-1 p-6 overflow-y-auto bg-gray-50">
+            <div className="notes-container">
               {notes[selectedGroup.id] && notes[selectedGroup.id].map((note) => (
-                <div key={note.id} className="mb-6 bg-white p-4 rounded-lg shadow-sm">
-                  <p className="text-gray-800 whitespace-pre-wrap mb-3">{note.text}</p>
-                  <div className="flex items-center text-sm text-gray-500">
+                <div key={note.id} className="note-item">
+                  <p className="note-text">{note.text}</p>
+                  <div className="note-meta">
                     <span>{note.date}</span>
-                    <span className="mx-2">•</span>
+                    <span className="note-meta-separator">•</span>
                     <span>{note.time}</span>
                   </div>
                 </div>
@@ -244,39 +245,39 @@ const NotesApp = () => {
             </div>
             
             {/* Note Input Area */}
-            <div className="p-6 bg-white border-t border-gray-200">
-              <div className="flex items-end space-x-4">
-                <div className="flex-1 relative">
+            <div className="input-container">
+              <div className="input-wrapper">
+                <div className="input-field-container">
                   <textarea
                     value={noteText}
                     onChange={(e) => setNoteText(e.target.value)}
                     onKeyPress={handleNoteKeyPress}
                     placeholder="Here's the sample text for sample work"
-                    className="w-full p-3 border border-gray-300 rounded-lg resize-none focus:outline-none focus:border-blue-500 min-h-[80px]"
+                    className="input-field"
                     rows="3"
                   />
                 </div>
                 <button
                   onClick={addNote}
                   disabled={!noteText.trim()}
-                  className={`p-3 rounded-lg transition-colors ${
+                  className={`send-button ${
                     noteText.trim()
-                      ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                      : 'bg-gray-200 text-gray-400'
+                      ? 'send-button-active'
+                      : 'send-button-inactive'
                   }`}
                 >
-                 <img src={sendBtn} className='w-6 h-6 ' alt="" />
+                 <img src={sendBtn} className='w-6 h-6' alt="" />
                 </button>
               </div>
             </div>
           </>
         ) : (
           /* Welcome message when no group selected */
-          <div className="flex-1 flex items-center justify-center bg-blue-100">
-            <div className="text-center flex justify-center items-center flex-col">
-            <img src={image} className='md:w-[400px] md:h-[250px] h-[150px] w-[300px]' alt="" />
-              <h1 className="text-4xl font-medium text-gray-600 mb-2">Pocket Notes</h1>
-              <p className="text-gray-500">Send and receive messages without keeping your phone online.
+          <div className="welcome-container">
+            <div className="welcome-content">
+            <img src={image} className='welcome-image' alt="" />
+              <h1 className="welcome-title">Pocket Notes</h1>
+              <p className="welcome-subtitle">Send and receive messages without keeping your phone online.
 Use Pocket Notes on up to 4 linked devices and 1 mobile phone</p>
             </div>
           </div>
@@ -286,15 +287,15 @@ Use Pocket Notes on up to 4 linked devices and 1 mobile phone</p>
       {/* Create Group Popup */}
       {showCreateGroup && (
         <div 
-          className="popup-background fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="popup-background"
           onClick={handleBackgroundClick}
         >
-          <div className="bg-white rounded-lg p-6 w-96 mx-4">
-            <h3 className="text-lg font-semibold mb-4 text-black">Create New group</h3>
+          <div className="popup-content">
+            <h3 className="popup-title">Create New group</h3>
             
             {/* Group Name Input */}
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="form-group">
+              <label className="form-label">
                 Group Name
               </label>
               <input
@@ -303,23 +304,23 @@ Use Pocket Notes on up to 4 linked devices and 1 mobile phone</p>
                 onChange={(e) => setGroupName(e.target.value)}
                 onKeyPress={handleGroupNameKeyPress}
                 placeholder="Enter group name"
-                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-500"
+                className="form-input"
                 autoFocus
               />
             </div>
             
             {/* Color Selection */}
-            <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+            <div className="color-selection">
+              <label className="form-label">
                 Choose colour
               </label>
-              <div className="flex space-x-2">
+              <div className="color-options">
                 {colors.map((color) => (
                   <button
                     key={color}
                     onClick={() => setSelectedColor(color)}
-                    className={`w-8 h-8 rounded-full ${
-                      selectedColor === color ? 'ring-2 ring-gray-400' : ''
+                    className={`color-option ${
+                      selectedColor === color ? 'color-option-selected' : ''
                     }`}
                     style={{ backgroundColor: color }}
                   />
@@ -330,7 +331,7 @@ Use Pocket Notes on up to 4 linked devices and 1 mobile phone</p>
             {/* Create Button */}
             <button
               onClick={createGroup}
-              className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-medium transition-colors"
+              className="create-button"
             >
               Create
             </button>

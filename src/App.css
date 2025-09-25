@@ -1,0 +1,418 @@
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+/* Main container */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background-color: white;
+}
+
+/* Left Sidebar */
+.sidebar {
+  width: 320px;
+  background-color: white;
+  border-right: 1px solid #e5e7eb;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-hidden-mobile {
+  display: none;
+}
+
+.sidebar-visible {
+  display: flex;
+}
+
+/* Header */
+.header {
+  padding: 24px;
+}
+
+.header-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  margin: 0;
+}
+
+/* Groups List */
+.groups-container {
+  flex: 1;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+.group-item {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.group-item:hover {
+  background-color: #f9fafb;
+}
+
+.group-item-selected {
+  background-color: #f3f4f6;
+}
+
+.group-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  margin-right: 16px;
+}
+
+.group-name {
+  color: #374151;
+  font-weight: 500;
+}
+
+/* Add Group Button */
+.add-button-container {
+  padding: 16px;
+}
+
+.add-button {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: background-color 0.2s;
+  margin-left: auto;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.add-button:hover {
+  background-color: #1d4ed8;
+}
+
+.add-button img {
+  width: 56px;
+  height: 56px;
+}
+
+/* Main Content */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content-hidden-mobile {
+  display: none;
+}
+
+.main-content-visible {
+  display: flex;
+}
+
+/* Header with group info */
+.group-header {
+  background-color: #2563eb;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+}
+
+.back-button {
+  margin-right: 16px;
+  color: white;
+  background: none;
+  border: none;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  cursor: pointer;
+  display: none;
+}
+
+.back-button:hover {
+  background-color: #1d4ed8;
+}
+
+.group-header-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  margin-right: 16px;
+}
+
+.group-header-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: white;
+  margin: 0;
+}
+
+/* Notes Display Area */
+.notes-container {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+  background-color: #f9fafb;
+}
+
+.note-item {
+  margin-bottom: 24px;
+  background-color: white;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+}
+
+.note-text {
+  color: #374151;
+  white-space: pre-wrap;
+  margin-bottom: 12px;
+  margin: 0 0 12px 0;
+}
+
+.note-meta {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.note-meta-separator {
+  margin: 0 8px;
+}
+
+/* Note Input Area */
+.input-container {
+  padding: 24px;
+  background-color: white;
+  border-top: 1px solid #e5e7eb;
+}
+
+.input-wrapper {
+  display: flex;
+  align-items: end;
+  gap: 16px;
+}
+
+.input-field-container {
+  flex: 1;
+  position: relative;
+}
+
+.input-field {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  resize: none;
+  outline: none;
+  min-height: 80px;
+  font-family: inherit;
+}
+
+.input-field:focus {
+  border-color: #3b82f6;
+}
+
+.send-button {
+  padding: 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.send-button-active {
+  background-color: #2563eb;
+  color: white;
+}
+
+.send-button-active:hover {
+  background-color: #1d4ed8;
+}
+
+.send-button-inactive {
+  background-color: #e5e7eb;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+.send-button img {
+  width: 24px;
+  height: 24px;
+}
+
+/* Welcome Screen */
+.welcome-container {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #dbeafe;
+}
+
+.welcome-content {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.welcome-image {
+  height: 150px;
+  width: 300px;
+}
+
+.welcome-title {
+  font-size: 36px;
+  font-weight: 500;
+  color: #4b5563;
+  margin-bottom: 8px;
+  margin-top: 0;
+}
+
+.welcome-subtitle {
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Create Group Popup */
+.popup-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 50;
+}
+
+.popup-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 24px;
+  width: 384px;
+  margin: 0 16px;
+}
+
+.popup-title {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: black;
+  margin-top: 0;
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-input:focus {
+  border-color: #3b82f6;
+}
+
+/* Color Selection */
+.color-selection {
+  margin-bottom: 24px;
+}
+
+.color-options {
+  display: flex;
+  gap: 8px;
+}
+
+.color-option {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.color-option-selected {
+  box-shadow: 0 0 0 2px #9ca3af;
+}
+
+/* Create Button */
+.create-button {
+  width: 100%;
+  background-color: #2563eb;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.create-button:hover {
+  background-color: #1d4ed8;
+}
+
+/* Mobile Responsive */
+@media (min-width: 768px) {
+  .sidebar-hidden-mobile {
+    display: flex;
+  }
+  
+  .main-content-hidden-mobile {
+    display: flex;
+  }
+  
+  .back-button {
+    display: none;
+  }
+  
+  .welcome-image {
+    width: 400px;
+    height: 250px;
+  }
+}   
